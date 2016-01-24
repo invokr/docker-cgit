@@ -1,6 +1,9 @@
 FROM centos:7
 MAINTAINER Robin Dietrich <me@invokr.org>
 
+# Htaccess credentials
+ENV HTTP_AUTH_USER="", HTTP_AUTH_PASSWORD=""
+
 # Upgrade base system
 RUN yum update -y && yum upgrade -y && yum install gcc git httpd highlight make nginx openssl-devel -y && yum clean all
 
@@ -11,7 +14,8 @@ RUN git clone git://git.zx2c4.com/cgit && cd cgit && git submodule init && git s
 # Configure
 ADD config/httpd.conf /etc/httpd/conf/httpd.conf
 ADD config/cgit.conf /etc/cgitrc
-ADD config/highlight.sh /opt/highlight.sh
+
+ADD scripts /opt
 
 # Install init
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.0.0/dumb-init_1.0.0_amd64 /usr/local/bin/dumb-init
@@ -19,4 +23,4 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 # Start
 EXPOSE 80
-CMD ["/usr/local/bin/dumb-init", "apachectl", "-DFOREGROUND"]
+CMD ["/usr/local/bin/dumb-init", "/opt/init.sh"]
