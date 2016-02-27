@@ -3,6 +3,7 @@ Docker Teamspeak
 
 ![](https://badge.imagelayers.io/invokr/cgit:latest.svg)
 ![](https://img.shields.io/docker/pulls/invokr/cgit.svg)
+[![Build Status](https://travis-ci.org/invokr/docker-cgit.svg?branch=master)](https://travis-ci.org/invokr/docker-cgit)
 
 [CGIT](http://git.zx2c4.com/cgit/) Docker container. Scans and displays every repository under `/git`.
 
