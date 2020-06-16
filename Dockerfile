@@ -8,7 +8,7 @@ ENV HTTP_AUTH_USER="", HTTP_AUTH_PASSWORD=""
 RUN yum update -y && yum upgrade -y && yum install gcc git httpd highlight make nginx openssl-devel -y && yum clean all
 
 # Install cgit
-RUN git clone git://git.zx2c4.com/cgit && cd cgit && git submodule init && git submodule update \
+RUN git clone --depth=1 --branch master git://git.zx2c4.com/cgit && cd cgit && git submodule init && git submodule update \
  && make NO_LUA=1 && make install && cd .. && rm -Rf cgit
 
 # Configure
